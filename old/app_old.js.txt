@@ -1,0 +1,60 @@
+const todoInputEl = document.querySelector(".todo__input");
+const todoListEl = document.querySelector(".todo__list");
+const todoEl = document.querySelector(".todo__item");
+const todoButtonEl = document.querySelector(".todo__button");
+
+
+function addTodo() {
+
+  todoInputEl.addEventListener("change", function() {
+   
+   // nieuw LI aanmken met tekst uit input veld.
+
+   let todoItem = document.createElement("LI");
+   let inputText = todoInputEl.value;
+   let t = document.createTextNode(inputText);
+
+   // button aan maken.
+
+   let todoButton = document.createElement("button");
+   let todoButtonText = document.createTextNode("Del");
+
+   todoListEl.appendChild(todoItem);
+   todoListEl.lastChild.appendChild(t);
+   todoListEl.lastChild.classList.add("todo__item");
+
+   todoListEl.lastChild.appendChild(todoButton);
+   todoListEl.lastChild.lastChild.appendChild(todoButtonText);
+   todoListEl.lastChild.lastChild.classList.add("todo__button")	
+	
+   todoInputEl.value="";
+
+  })
+}
+
+// Helaas werkt de toggleTodo functie nu ook op List (UL) nivo en niet alleen op het list-item (IL) nivo.
+
+function toggleTodo() { 
+
+  todoListEl.addEventListener("click", function() {
+    event.target.classList.toggle("done");
+
+  })
+}
+
+// Werkt alleen op de button van het het eerste list item.
+
+function removeTodo() {
+  todoButtonEl.addEventListener("click", function() {
+    console.log(event.target.parentElement);
+    todoListEl.removeChild(event.target.parentElement);
+  
+  })
+}
+
+
+addTodo();
+toggleTodo();
+removeTodo();
+       
+       
